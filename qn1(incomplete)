@@ -1,0 +1,91 @@
+package javaassignmnets;
+import java.util.*;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+/**
+ * @author acer
+ *
+ */
+public class Listoperations
+ {
+	@SuppressWarnings("resource")
+	public static void main(String[] args)
+    {
+        // input list with duplicates
+    	ArrayList<String> Strlist=new ArrayList<String>(Arrays.asList("abcd","abcd","abcd","hdr","hdr","rdc","xyz"));  
+      List<Integer> Intlist = new ArrayList<>(
+      Arrays.asList(1, 10, 1, 2, 2, 3, 10, 3, 3, 4, 5, 5));
+      // Print the Arraylist
+        System.out.println("String ArrayList with duplicates: "+ Strlist);
+        System.out.println("Integer ArrayList with duplicates: "+ Intlist);
+        Set<String> stringSetwithoutdupicates = new HashSet<String>();//removing duplicates from stringlist
+        for (String x : Strlist)
+        	stringSetwithoutdupicates .add(x);
+        System.out.println("Created String HashSet without duplicates is :");
+        for (String x :stringSetwithoutdupicates)
+            System.out.println(x);
+        Set<Integer> integerSetwithoutdupicates = new HashSet<Integer>();//removing duplicates from integerlist
+        for (Integer y :Intlist)
+        	integerSetwithoutdupicates .add(y);
+        System.out.println("Created Integer HashSet without duplicates is :");
+        for (Integer y :integerSetwithoutdupicates)
+            System.out.println(y);
+        // Sorting HashSet using List
+        List<String> sortedstringlist = new ArrayList<String>(stringSetwithoutdupicates);
+        Collections.sort(sortedstringlist);
+  
+        // Print the sorted elements of the HashSet
+        System.out.println("HashSet elements "
+                           + "in sorted order "
+                           + "using List: "
+                           + sortedstringlist);
+        //grouping into odd and even
+        List<Integer> ints = Arrays.asList(1, 10, 1, 2, 2, 3, 10, 3, 3, 4, 5, 5);
+        List<Integer> oddList = new ArrayList<>();
+        List<Integer> evenList = new ArrayList<>();
+
+        for (Integer i : ints) {
+            if (i % 2 == 0) {
+                evenList.add(i);
+            } else {
+                oddList.add(i);
+            }
+        }
+        System.out.println("odd numbers in the list is"+oddList);
+        System.out.println("even numbers in the list is"+evenList);
+        FileWriter writer = null;//writing into file
+		try {
+			writer = new FileWriter("output.txt");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+    	for(String str:sortedstringlist ) {
+    	  try {
+			writer.write(str + System.lineSeparator());
+			}
+    		 catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    	}
+    	try {
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+try {
+    FileOutputStream fos = new FileOutputStream("output");
+	ObjectOutputStream oos = new ObjectOutputStream(fos);   
+    oos.writeObject(sortedstringlist); 
+    } catch(Exception ex) {
+    ex.printStackTrace();
+}finally {
+	System.out.println("resulting lists written into the file");
+}
+    }
+    }
+ 
