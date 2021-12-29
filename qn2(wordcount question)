@@ -1,0 +1,63 @@
+package wordscountfile;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+/**
+ * @author acer
+ *
+ */
+public class wordscountfile {
+	static void CountWords(String filename, Map< String, Integer> words) throws FileNotFoundException
+	{//creating file
+    try {
+     File myObj = new File("data.txt");
+     if (myObj.createNewFile()) {
+    System.out.println("File created: " + myObj.getName());
+    }else {
+    System.out.println("File already exists.");
+    }
+    } catch (IOException e) {
+    System.out.println("An error occurred.");
+    e.printStackTrace();
+    }//writing into the file
+    try {
+    FileWriter myWriter = new FileWriter("data.txt");
+    myWriter.write("Java was originally developed by James Gosling at Sun Microsystems (which has since been acquired by Oracle) and released in 1995 as a core component of Sun Microsystems' Java platform. The original and reference implementation Java compilers, virtual machines, and class libraries were originally released by Sun under proprietary licenses. As of May 2007, in compliance with the specifications of the Java Community Process, Sun had relicensed most of its Java technologies under the GPL-2.0-only license. Oracle offers its own HotSpot Java Virtual Machine, however the official reference implementation is the OpenJDK JVM which is free open-source software and used by most developers and is the default JVM for almost all Linux distributions.\r\n"
+    		+ "\r\n"
+    		+ "As of October 2021, Java 17 is the latest version. Java 8, 11 and 17 are the current long-term support (LTS) versions. Oracle released the last zero-cost public update for the legacy version Java 8 LTS in January 2019 for commercial use, although it will otherwise still support Java 8 with public updates for personal use indefinitely. Other vendors have begun to offer zero-cost builds of OpenJDK 8 and 11 that are still receiving security and other upgrades.\r\n"
+    		+ "\r\n"
+    		+ "Oracle (and others) highly recommend uninstalling outdated and unsupported versions of Java, because of serious risks due to unresolved security issues.");
+    myWriter.close();
+    System.out.println("Successfully wrote to the file.");
+  } catch (IOException e) {
+    System.out.println("An error occurred.");
+    e.printStackTrace();
+  }
+   Scanner file=new Scanner (new File(filename));
+   while(file.hasNext()){
+   String word=file.next();
+   Integer count=words.get(word);
+   if(count!=null)
+   count++;
+   else
+   count=1;
+   words.put(word,count);
+   }
+   file.close();
+   }
+   public static void main(String[] args){
+	Map<String,Integer> words=new HashMap<String, Integer>();
+	try {
+		CountWords("data.txt",words);
+	}catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+	e.printStackTrace();
+	}
+	System.out.println(words);
+	}
+   }
