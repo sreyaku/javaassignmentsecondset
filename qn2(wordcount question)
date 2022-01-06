@@ -15,7 +15,7 @@ public class wordscountfile {
 	static void CountWords(String filename, Map< String, Integer> words) throws FileNotFoundException
 	{//creating file
     try {
-     File myObj = new File("data.txt");
+     File myObj = new File("filename");
      if (myObj.createNewFile()) {
     System.out.println("File created: " + myObj.getName());
     }else {
